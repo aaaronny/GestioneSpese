@@ -8,7 +8,13 @@ var showMessage = function (msg){
 var showConfirmDelete = function (data){
 	 $('#confirmDelete').puidialog({
 		 location: 'center',
+		 width: 450,
+		 height:50,
+		 title: ' ',
 		 resizable: false,
+		 closeOnEscape: true,
+		 modal: true,
+		 closable: false,
          buttons: [{
                  text: 'Si',
                  icon: 'fa-check',

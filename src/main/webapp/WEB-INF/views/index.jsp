@@ -17,7 +17,7 @@
 
 <div id="message"></div>
 <div id="confirmDelete" style="display:none;">
-<p>Confermi la cancellazione di questo elemento?</p>
+Confermi la cancellazione di questo elemento?
 </div>
 
 <div id="tblSpese"></div>
