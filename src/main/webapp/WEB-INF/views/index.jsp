@@ -8,11 +8,7 @@
     <script src="/GestioneSpese/resources/js/spesaFrontController.js"></script>
     <script src="/GestioneSpese/resources/js/homeFrontController.js"></script>
     <link rel="stylesheet" type="text/css" href="/GestioneSpese/resources/css/theme.css" />
-<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="/GestioneSpese/resources/fo-aw/css/font-awesome.css" />
-=======
-    <link rel="stylesheet" type="text/css" href="/GestioneSpese/resources/css/jquery-ui.css" />
->>>>>>> parent of 4ad74b1... change css presentation
     <link rel="stylesheet" type="text/css" href="/GestioneSpese/resources/css/primeui.min.css" />
 
 </head>
