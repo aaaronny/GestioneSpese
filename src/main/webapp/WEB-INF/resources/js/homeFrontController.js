@@ -1,15 +1,66 @@
+var DELETE_OK = [{severity: 'info', summary: 'Gestione Spese', detail: 'Cancellazione record avvenuta con successo!'}];
+var DELETE_FAIL = [{severity: 'error', summary: 'Gestione Spese', detail: 'Errore cancellazione record!'}];
+
+var showMessage = function (msg){
+        $('#message').puigrowl('show', msg);
+    };
+
+var showConfirmDelete = function (data){
+	 $('#confirmDelete').puidialog({
+		 location: 'center',
+		 resizable: false,
+         buttons: [{
+                 text: 'Si',
+                 icon: 'fa-check',
+                 click: function() {
+                	 $('#confirmDelete').puidialog('hide');
+                	 if (delSpesa(data)){
+                		 showMessage(DELETE_OK);
+                		 $('#tblSpese').puidatatable('reload');
+                	 } else {
+                		 showMessage(DELETE_FAIL);
+                	 }
+                 }
+             },
+             {
+                 text: 'No',
+                 icon: 'fa-close',
+                 click: function() {
+                	 $('#confirmDelete').puidialog('hide');
+                 }
+             }
+         ]
+     });
+	 $('#confirmDelete').puidialog('show');
+}
+
 $(function() {
-    $('#table').puidatatable({
+	// COMPONENTE MESSAGGI
+	$('#message').puigrowl();
+	
+	// COMPONENTE TABELLA SPESE
+    $('#tblSpese').puidatatable({
         caption: 'Spese',
-        editMode: 'cell',
         paginator: {
             rows: 10
         },
         columns: [
-            {field: 'idSpesa', headerText: 'ID', editor: 'input'},
-            {field: 'descrizione', headerText: 'Descrizione', editor: 'input'},
-            {field: 'importo', headerText: 'Importo', editor: 'input'},
-            {field: 'data', headerText: 'Data', editor: 'input'}
+            {field: 'idSpesa', headerText: 'ID'},
+            {field: 'descrizione', headerText: 'Descrizione'},
+            {field: 'importo', headerText: 'Importo'},
+            {field: 'data', headerText: 'Data'},
+            {headerText: 'Tipo Spesa',content: function(localData) {
+        		var tipospesa = localData.tipospesaBean;
+        		return (tipospesa != null) ? tipospesa.descrizione : 'N.D.';
+        	}},
+            {headerStyle:"width:10%",bodyStyle: 'text-align:center', headerText: '-', content: function(localData) {
+                return $('<button type="button"></button>').puibutton({
+                    icon: 'fa-trash',
+                    click: function(event){
+                    	showConfirmDelete(localData.idSpesa);
+                    }
+                });
+            }}
         ],
         datasource: function(callback) {
             $.ajax({

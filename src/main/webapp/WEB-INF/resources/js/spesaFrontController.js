@@ -18,20 +18,20 @@ function addSpesa(spesa){
     });
 }
 
-function delSpesa(spesa){
+function delSpesa(idSpesa){
 	var ps = {};
-	ps["idSpesa"] = spesa[0];
-    $.ajax({
+	ps["idSpesa"] = idSpesa;
+    return $.ajax({
         type: "DELETE",
         url: "/GestioneSpese/Spese",
 	    dataType: 'json',
 	    contentType : 'application/json',
         data: JSON.stringify(ps),
         success: function(res){
-            alert('CANCELLAZIONE AVVENUTA CON SUCCESSO!');
+        	return true;
         },
         failure: function(res) {
-            alert('ERRORE!');
+        	return false;
         }
     });
 }
