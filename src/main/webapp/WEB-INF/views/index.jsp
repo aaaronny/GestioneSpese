@@ -16,6 +16,7 @@
 <body>
 
 <div id="message"></div>
+
 <div id="confirmDelete" style="display:none;">
 Confermi la cancellazione di questo elemento?
 </div>
