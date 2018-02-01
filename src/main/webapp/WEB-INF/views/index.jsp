@@ -4,12 +4,12 @@
 
     <script src="/GestioneSpese/resources/js/jquery-latest.js"></script>
     <script src="/GestioneSpese/resources/js/jquery-ui.js"></script>
-    <script src="/GestioneSpese/resources/js/primeui.min.js"></script>
+    <script src="/GestioneSpese/resources/js/primeui.js"></script>
     <script src="/GestioneSpese/resources/js/spesaFrontController.js"></script>
     <script src="/GestioneSpese/resources/js/homeFrontController.js"></script>
     <link rel="stylesheet" type="text/css" href="/GestioneSpese/resources/css/theme.css" />
     <link rel="stylesheet" type="text/css" href="/GestioneSpese/resources/fo-aw/css/font-awesome.css" />
-    <link rel="stylesheet" type="text/css" href="/GestioneSpese/resources/css/primeui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/GestioneSpese/resources/css/primeui.css" />
 
 </head>
 
