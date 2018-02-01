@@ -51,9 +51,9 @@ $(function() {
             rows: 10
         },
         columns: [
-            {field: 'idSpesa', headerText: 'ID'},
+            {field: 'idSpesa', headerText: 'ID', headerStyle: 'width: 8%'},
             {field: 'descrizione', headerText: 'Descrizione'},
-            {field: 'importo', headerText: 'Importo'},
+            {field: 'importo', headerText: 'Importo', content: function(localData){ return localData.importo + ' euro';s}},
             {field: 'data', headerText: 'Data'},
             {headerText: 'Tipo Spesa',content: function(localData) {
         		var tipospesa = localData.tipospesaBean;
