@@ -23,41 +23,33 @@ Confermi la cancellazione di questo elemento?
 </div>
 
 <div id="editorData" style="display:none">
-<h2 id="editorCaption"></h2>
-<div class="ui-grid ui-grid-responsive">
-    <div class="ui-grid-row">
+<h3 id="editorCaption"></h3>
+<div class="ui-grid ui-grid-responsive" style="margin-top: 5px; margin-bottom: 5px;">
+    <div class="ui-grid-row" id="idRowDiv">
         <div class="ui-grid-col-6">ID</div>
         <div class="ui-grid-col-6">
 			<input id="txtIdSpesa" type="text" />
 		</div>
     </div>
-</div>
-<div class="ui-grid ui-grid-responsive">
-	<div class="ui-grid-row">
+	<div class="ui-grid-row" style="margin-top: 5px; margin-bottom: 5px;">
         <div class="ui-grid-col-6">Descrizione</div>
         <div class="ui-grid-col-6">
 			<input id="txtDescrizione" type="text" />
 		</div>
     </div>
-</div>
-<div class="ui-grid ui-grid-responsive">
-    <div class="ui-grid-row">
+    <div class="ui-grid-row" style="margin-top: 5px; margin-bottom: 5px;">
         <div class="ui-grid-col-6">Importo</div>
         <div class="ui-grid-col-6">
 			<input id="txtImporto" type="text" />
 		</div>
     </div>
-</div>
-<div class="ui-grid ui-grid-responsive">
-    <div class="ui-grid-row">
+    <div class="ui-grid-row" style="margin-top: 5px; margin-bottom: 5px;">
         <div class="ui-grid-col-6">Data</div>
         <div class="ui-grid-col-6">
 			<input id="txtData" type="text" />
 		</div>
     </div>
-</div>
-<div class="ui-grid ui-grid-responsive">
-    <div class="ui-grid-row">
+    <div class="ui-grid-row" style="margin-top: 5px; margin-bottom: 5px;">
         <div class="ui-grid-col-6">Tipo Spesa</div>
         <div class="ui-grid-col-6">
 			<input id="txtTipospesa" type="text" />

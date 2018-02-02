@@ -67,7 +67,7 @@ var showEditor = function (object){
    	 $('#editorData').puidialog({
    		 location: 'center',
    		 width: 540,
-   		 height:300,
+   		 height:260,
    		 title: ' ',
    		 resizable: false,
    		 closeOnEscape: true,
