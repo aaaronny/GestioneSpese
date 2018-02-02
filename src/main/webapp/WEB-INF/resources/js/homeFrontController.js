@@ -4,7 +4,7 @@ var DELETE_FAIL = [{severity: 'error', summary: 'Gestione Spese', detail: 'Error
 var tblSpeseObj = {
         caption: 'Spese',
         paginator: {
-            rows: 1
+            rows: 5
         },
         columns: [
             {field: 'idSpesa', headerText: 'ID', headerStyle: 'width: 8%'},
@@ -59,9 +59,9 @@ var showMessage = function (msg){
 var showEditor = function (object){
 	var settings;
 	if(object == null){
-		settings = {okMsg: 0, failMsg: 0, caption: 'Aggiungi elemento'};
+		settings = {okMsg: 0, failMsg: 0, caption: 'Aggiungi elemento', restUrl: 0};
 	} else {
-		settings = {okMsg: 0, failMsg: 0, caption: 'Modifica elemento'};
+		settings = {okMsg: 0, failMsg: 0, caption: 'Modifica elemento', restUrl: 0};
 	}
 	$('#editorCaption').text(settings.caption);
    	 $('#editorData').puidialog({
