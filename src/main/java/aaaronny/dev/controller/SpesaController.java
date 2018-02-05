@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,11 +50,11 @@ public class SpesaController {
 		return response;
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, produces="application/json", consumes="application/json")
-	public ResponseEntity<Boolean> delSpesa(@RequestBody Spesa spesa){
-		logger.info("OBJECT PASSED ----------> " + spesa.toString());
+	@RequestMapping(value="/Spese/{id}", method = RequestMethod.DELETE, produces="application/json", consumes="application/json")
+	public ResponseEntity<Boolean> delSpesa(@PathVariable(value="id") int idSpesa){
+		logger.info("ID OBJECT PASSED ----------> " + idSpesa);
 		ResponseEntity<Boolean> response = null;
-		boolean result = service.del(spesa);
+		boolean result = service.del(idSpesa);
 		if(result){
 			response = new ResponseEntity<Boolean>(result, HttpStatus.OK);
 		}else{

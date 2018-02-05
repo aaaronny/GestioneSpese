@@ -38,7 +38,7 @@ var tblSpeseObj = {
 var initEditorComponent = function(){
 	$('#txtIdSpesa').puiinputtext();
 	$('#txtDescrizione').puiinputtext();
-	$('#txtImporto').puiinputtext();
+	$('#txtImporto').puispinner({suffix:' euro', step: 0.1});  
 	$('#txtData').puiinputtext();
     $('#txtTipospesa').puiautocomplete({
         completeSource: getAllTipospesa().map(function(d) { return d.descrizione + ' - ' + d.idTipospesa; }),
@@ -56,54 +56,59 @@ var showMessage = function (msg){
         $('#message').puigrowl('show', msg);
     };
 
-var showEditor = function (object){
+var showEditor = function (data){
 	var settings;
-	if(object == null){
+	if(data == null){
 		settings = {okMsg: 0, failMsg: 0, caption: 'Aggiungi elemento', restUrl: 0};
+		$('#txtIdSpesa').val("auto");
 	} else {
 		settings = {okMsg: 0, failMsg: 0, caption: 'Modifica elemento', restUrl: 0};
+		$('#txtIdSpesa').val(data.idSpesa);
+		$('#txtDescrizione').val(data.descrizione);
+		$('#txtImporto').val((data.importo * 1) + ' euro');
+		$('#txtData').val(data.data);
+		if (data.tipospesaBean != null)
+			$('#txtTipospesa').puiautocomplete('select', data.tipospesaBean.descrizione);
 	}
 	$('#editorCaption').text(settings.caption);
-   	 $('#editorData').puidialog({
-   		 location: 'center',
-   		 width: 540,
-   		 height:260,
-   		 title: ' ',
-   		 resizable: false,
-   		 closeOnEscape: true,
-   		 modal: true,
-   		 closable: false,
-         buttons: [{
-                    text: 'Salva',
-                    icon: 'fa-check',
-                    click: function() {
-                   	 $('#editorData').puidialog('hide');
-                   	 if (delSpesa(data)){
-                   		 showMessage(DELETE_OK);
-                   		 $('#tblSpese').puidatatable('reload');
-                   	 } else {
-                   		 showMessage(DELETE_FAIL);
-                   	 }
-                    }
-                },
-                {
-                    text: 'Annulla',
-                    icon: 'fa-close',
-                    click: function() {
-                   	 $('#editorData').puidialog('hide');
-                    }
-                }
-            ]
-        });
-   	 $('#editorData').puidialog('show');
-   }    
+	$('#editorData').puidialog({
+		location : 'center',
+		width : 540,
+		height : 260,
+		title : settings.caption + ' - ID: ' + data.idSpesa,
+		resizable : false,
+		closeOnEscape : true,
+		modal : true,
+		closable : false,
+		buttons : [ {
+			text : 'Salva',
+			icon : 'fa-check',
+			click : function() {
+				$('#editorData').puidialog('hide');
+				if (delSpesa(data)) {
+					showMessage(DELETE_OK);
+					$('#tblSpese').puidatatable('reload');
+				} else {
+					showMessage(DELETE_FAIL);
+				}
+			}
+		}, {
+			text : 'Annulla',
+			icon : 'fa-close',
+			click : function() {
+				$('#editorData').puidialog('hide');
+			}
+		} ]
+	});
+	$('#editorData').puidialog('show');
+}    
 
 var showConfirmDelete = function (data){
 	 $('#confirmDelete').puidialog({
 		 location: 'center',
 		 width: 450,
 		 height:50,
-		 title: ' ',
+		 title: 'Elimina elemento - ID: ' + data,
 		 resizable: false,
 		 closeOnEscape: true,
 		 modal: true,

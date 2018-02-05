@@ -19,21 +19,22 @@ function addSpesa(spesa){
 }
 
 function delSpesa(idSpesa){
-	var ps = {};
-	ps["idSpesa"] = idSpesa;
-    return $.ajax({
+	var result;
+    $.ajax({
         type: "DELETE",
-        url: "/GestioneSpese/Spese",
+        async: false,
+        url: "/GestioneSpese/Spese/"+ idSpesa,
 	    dataType: 'json',
 	    contentType : 'application/json',
         data: JSON.stringify(ps),
         success: function(res){
-        	return true;
+        	result = true;
         },
         failure: function(res) {
-        	return false;
+        	result = false;
         }
     });
+    return result;
 }
 
 function updateSpesa(spesa){

@@ -62,9 +62,9 @@ public class SpesaDaoImpl implements SpesaDao {
 	}
 
 	@Override
-	public boolean del(Spesa spesa) {
+	public boolean del(int idSpesa) {
 		boolean result = false;
-		Spesa ts = findById(spesa.getIdSpesa());
+		Spesa ts = findById(idSpesa);
 		try{
 			logger.info("ROW SELECTED ----------> " + ts.toString());
 			entityManager.remove(ts);

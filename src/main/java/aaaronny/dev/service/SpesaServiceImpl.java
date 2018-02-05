@@ -30,8 +30,8 @@ public class SpesaServiceImpl implements SpesaService {
 	}
 
 	@Override
-	public boolean del(Spesa spesa) {
-		return dao.del(spesa);
+	public boolean del(int idSpesa) {
+		return dao.del(idSpesa);
 	}
 
 	@Override
