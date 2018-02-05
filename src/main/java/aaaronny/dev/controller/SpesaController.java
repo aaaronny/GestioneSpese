@@ -50,7 +50,7 @@ public class SpesaController {
 		return response;
 	}
 	
-	@RequestMapping(value="/Spese/{id}", method = RequestMethod.DELETE, produces="application/json", consumes="application/json")
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE, produces="application/json", consumes="application/json")
 	public ResponseEntity<Boolean> delSpesa(@PathVariable(value="id") int idSpesa){
 		logger.info("ID OBJECT PASSED ----------> " + idSpesa);
 		ResponseEntity<Boolean> response = null;

@@ -1,29 +1,15 @@
 function addSpesa(spesa){
+	var result;
 	var ps = {};
-	ps["data"] = spesa[1];
-	ps["descrizione"] = spesa[2];
-	ps["importo"] = spesa[3];
+	ps['descrizione'] = spesa.descrizione;
+	ps['importo'] = spesa.importo;
+	ps['data'] = spesa.data;
+	ps['tipospesaBean'] = spesa.tipospesaBean;
+	
     $.ajax({
         type: "POST",
-        url: "/GestioneSpese/Spese",
-	    dataType: 'json',
-	    contentType : 'application/json',
-        data: JSON.stringify(ps),
-        success: function(res){
-            alert('INSERIMENTO AVVENUTO CON SUCCESSO!');
-        },
-        failure: function(res) {
-            alert('ERRORE!');
-        }
-    });
-}
-
-function delSpesa(idSpesa){
-	var result;
-    $.ajax({
-        type: "DELETE",
         async: false,
-        url: "/GestioneSpese/Spese/"+ idSpesa,
+        url: "/GestioneSpese/Spese",
 	    dataType: 'json',
 	    contentType : 'application/json',
         data: JSON.stringify(ps),
@@ -37,22 +23,46 @@ function delSpesa(idSpesa){
     return result;
 }
 
+function delSpesa(idSpesa){
+	var result;
+    $.ajax({
+        type: "DELETE",
+        async: false,
+        url: "/GestioneSpese/Spese/"+ idSpesa,
+	    dataType: 'json',
+	    contentType : 'application/json',
+        success: function(res){
+        	result = true;
+        },
+        failure: function(res) {
+        	result = false;
+        }
+    });
+    return result;
+}
+
 function updateSpesa(spesa){
+	var result;
 	var ps = {};
-	ps["data"] = spesa[1];
-	ps["descrizione"] = spesa[2];
-	ps["importo"] = spesa[3];
+	ps['idSpesa'] = spesa.idSpesa;
+	ps['descrizione'] = spesa.descrizione;
+	ps['importo'] = spesa.importo;
+	ps['data'] = spesa.data;
+	ps['tipospesaBean'] = spesa.tipospesaBean;
+	
     $.ajax({
         type: "PUT",
+        async: false,
         url: "/GestioneSpese/Spese",
 	    dataType: 'json',
 	    contentType : 'application/json',
         data: JSON.stringify(ps),
         success: function(res){
-            alert('MODIFICA AVVENUTA CON SUCCESSO!');
+        	result = true;
         },
         failure: function(res) {
-            alert('ERRORE!');
+        	result = false;
         }
     });
+    return result;
 }

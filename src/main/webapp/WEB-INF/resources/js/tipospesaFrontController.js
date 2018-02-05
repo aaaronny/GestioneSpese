@@ -12,6 +12,20 @@ function getAllTipospesa() {
 	return result;
 }
 
+function getTipospesaById(id) {
+	var result;
+	$.ajax({
+		type : "GET",
+        async: false,
+		url : '/GestioneSpese/Tipospese/' + id,
+		dataType : "json",
+		success : function(res){
+			result = res;
+		}
+	});
+	return result;
+}
+
 function addTipospesa(tipospesa){
 	var ps = {};
 	ps["data"] = tipospesa[1];

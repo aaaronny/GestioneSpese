@@ -37,7 +37,7 @@ public class TipospesaController {
 		return response;
 	}
 	
-	@RequestMapping(value="/Tipospese/{id}", method = RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/{id}", method = RequestMethod.GET, produces="application/json")
 	public ResponseEntity<Tipospesa> getTipospesaById(@PathVariable(value="id") int idTipospesa){
 		ResponseEntity<Tipospesa> response = null;
 		Tipospesa result = null;

@@ -1,5 +1,9 @@
 var DELETE_OK = [{severity: 'info', summary: 'Gestione Spese', detail: 'Cancellazione record avvenuta con successo!'}];
 var DELETE_FAIL = [{severity: 'error', summary: 'Gestione Spese', detail: 'Errore cancellazione record!'}];
+var ADD_OK = [{severity: 'info', summary: 'Gestione Spese', detail: 'Aggiunta record avvenuta con successo!'}];
+var ADD_FAIL = [{severity: 'error', summary: 'Gestione Spese', detail: 'Errore aggiunta record!'}];
+var UPDATE_OK = [{severity: 'info', summary: 'Gestione Spese', detail: 'Modifica record avvenuta con successo!'}];
+var UPDATE_FAIL = [{severity: 'error', summary: 'Gestione Spese', detail: 'Errore modifica record!'}];
 
 var tblSpeseObj = {
         caption: 'Spese',
@@ -35,61 +39,75 @@ var tblSpeseObj = {
         }
     };
 
-var initEditorComponent = function(){
+function initEditorComponent(){
+	$('p-datepicker').children('input').puiinputtext();
 	$('#txtIdSpesa').puiinputtext();
 	$('#txtDescrizione').puiinputtext();
-	$('#txtImporto').puispinner({suffix:' euro', step: 0.1});  
-	$('#txtData').puiinputtext();
-    $('#txtTipospesa').puiautocomplete({
-        completeSource: getAllTipospesa().map(function(d) { return d.descrizione + ' - ' + d.idTipospesa; }),
-        dropdown: true,
-        select: function(event, item){
-        	var label = $('#txtTipospesa').val();
-        	var splitted = label.split(' - ');
-        	$('#hddIdTipospesa').val(splitted[splitted.length - 1]);
-        	alert($('#hddIdTipospesa').val());
-        }
+	$('#txtImporto').puispinner({step: 0.1});
+    $('#txtTipospesa').puidropdown({
+        data: getAllTipospesa().map(function(d) { return {value: d.idTipospesa, label: d.descrizione}; }),
+        filter: true
     });
 };
+
+function sendSpeseData(func){
+	var spesa = {
+			idSpesa: $('#txtIdSpesa').val(),
+			descrizione: $('#txtDescrizione').val(),
+			importo: $('#txtImporto').val(),
+			data: document.getElementById('txtData').getElementsByTagName('input')[0].value,
+			tipospesaBean: {idTipospesa: $('#txtTipospesa').val()}
+	}
+	return (func == null) ? addSpesa(spesa) : updateSpesa(spesa);
+}
+
+function resetSpeseData(){
+	$('#txtIdSpesa').val('');
+	$('#txtDescrizione').val('');
+	$('#txtImporto').val(0);
+	document.getElementById('txtData').getElementsByTagName('input')[0].value = '';
+}
 
 var showMessage = function (msg){
         $('#message').puigrowl('show', msg);
     };
-
+    
 var showEditor = function (data){
 	var settings;
 	if(data == null){
-		settings = {okMsg: 0, failMsg: 0, caption: 'Aggiungi elemento', restUrl: 0};
+		settings = {okMsg: ADD_OK, failMsg: ADD_FAIL, caption: 'Aggiungi elemento', dialogTitle: 'Aggiungi elemento' };
 		$('#txtIdSpesa').val("auto");
 	} else {
-		settings = {okMsg: 0, failMsg: 0, caption: 'Modifica elemento', restUrl: 0};
+		settings = {okMsg: UPDATE_OK, failMsg: UPDATE_FAIL, caption: 'Modifica elemento', dialogTitle: 'Modifica elemento - ID: ' + data.idSpesa };
 		$('#txtIdSpesa').val(data.idSpesa);
 		$('#txtDescrizione').val(data.descrizione);
-		$('#txtImporto').val((data.importo * 1) + ' euro');
+		$('#txtImporto').val(data.importo * 1);
 		$('#txtData').val(data.data);
 		if (data.tipospesaBean != null)
-			$('#txtTipospesa').puiautocomplete('select', data.tipospesaBean.descrizione);
+			$('#txtTipospesa').puidropdown('selectValue', data.tipospesaBean.idTipospesa);
 	}
+	
 	$('#editorCaption').text(settings.caption);
 	$('#editorData').puidialog({
 		location : 'center',
 		width : 540,
 		height : 260,
-		title : settings.caption + ' - ID: ' + data.idSpesa,
+		title : settings.dialogTitle,
 		resizable : false,
 		closeOnEscape : true,
 		modal : true,
 		closable : false,
 		buttons : [ {
 			text : 'Salva',
-			icon : 'fa-check',
+			icon : 'fa-save',
 			click : function() {
 				$('#editorData').puidialog('hide');
-				if (delSpesa(data)) {
-					showMessage(DELETE_OK);
+				resetSpeseData();
+				if (sendSpeseData(data)) {
+					showMessage(settings.okMsg);
 					$('#tblSpese').puidatatable('reload');
 				} else {
-					showMessage(DELETE_FAIL);
+					showMessage(settings.failMsg);
 				}
 			}
 		}, {
@@ -97,6 +115,7 @@ var showEditor = function (data){
 			icon : 'fa-close',
 			click : function() {
 				$('#editorData').puidialog('hide');
+				resetSpeseData();
 			}
 		} ]
 	});
@@ -139,6 +158,14 @@ var showConfirmDelete = function (data){
 }
 
 $(function() {
+
+	// BUTTON AGGIUNGI SPESA
+	$('#bttAddSpesa').puibutton({
+		icon: 'fa-plus',
+	    click: function(event) {
+	    	showEditor(null);
+	    }
+	});
 	
 	// COMPONENTI EDITOR
 	initEditorComponent();
