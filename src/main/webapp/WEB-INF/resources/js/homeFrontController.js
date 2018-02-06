@@ -82,7 +82,7 @@ var showEditor = function (data){
 		$('#txtIdSpesa').val(data.idSpesa);
 		$('#txtDescrizione').val(data.descrizione);
 		$('#txtImporto').val(data.importo * 1);
-		$('#txtData').val(data.data);
+		document.getElementById('txtData').getElementsByTagName('input')[0].value = data.data;
 		if (data.tipospesaBean != null)
 			$('#txtTipospesa').puidropdown('selectValue', data.tipospesaBean.idTipospesa);
 	}
@@ -175,4 +175,5 @@ $(function() {
 	
 	// COMPONENTE TABELLA SPESE
     $('#tblSpese').puidatatable(tblSpeseObj);
+    
 });
