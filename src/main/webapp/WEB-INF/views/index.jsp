@@ -39,8 +39,8 @@
 		</div>
 		<div class="ui-grid-row" id="idRowDiv">
 			<div class="ui-grid-col-1"></div>
-			<div class="ui-grid-col-10">
-				<button id="bttAddSpesa" is="p-button" icon="fa-plus" onclick="editorManager.show(null)">Aggiungi</button>
+			<div class="ui-grid-col-10" style="text-align: right">
+				<button style="margin-top:-32; margin-right:15" id="bttAddSpesa" is="p-button" icon="fa-plus" onclick="editorManager.show(null)"></button>
 			</div>
 			<div class="ui-grid-col-1"></div>
 		</div>
