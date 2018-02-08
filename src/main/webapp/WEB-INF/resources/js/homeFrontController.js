@@ -20,10 +20,10 @@ var tblSpeseObj = {
         		return (tipospesa != null) ? tipospesa.descrizione : 'N.D.';
         	}},
             {headerStyle:"width:5%",bodyStyle: 'text-align:center', headerText: '-', content: function(localData) {
-            	return $('<button type="button"></button>').puibutton({ icon: 'fa-pencil', click: function(event){ showEditor(localData); } });
+            	return $('<button type="button"></button>').puibutton({ icon: 'fa-pencil', click: function(event){ editorManager.show(localData); } });
             }},
             {headerStyle:"width:5%",bodyStyle: 'text-align:center', headerText: '-', content: function(localData) {
-            	return $('<button type="button"></button>').puibutton({ icon: 'fa-trash', click: function(event){ showConfirmDelete(localData.idSpesa); } });
+            	return $('<button type="button"></button>').puibutton({ icon: 'fa-trash', click: function(event){ editorManager.showDelete(localData.idSpesa); } });
             }}
         ],
         datasource: function(callback) {
@@ -43,59 +43,21 @@ var showMessage = function (msg){
         $('#message').puigrowl('show', msg);
     };    
 
-var showConfirmDelete = function (data){
-	 $('#confirmDelete').puidialog({
-		 location: 'center',
-		 width: 450,
-		 height:50,
-		 title: 'Elimina elemento - ID: ' + data,
-		 resizable: false,
-		 closeOnEscape: true,
-		 modal: true,
-		 closable: false,
-         buttons: [{
-                 text: 'Si',
-                 icon: 'fa-check',
-                 click: function() {
-                	 $('#confirmDelete').puidialog('hide');
-                	 if (delSpesa(data)){
-                		 showMessage(DELETE_OK);
-                		 $('#tblSpese').puidatatable('reload');
-                	 } else {
-                		 showMessage(DELETE_FAIL);
-                	 }
-                 }
-             },
-             {
-                 text: 'No',
-                 icon: 'fa-close',
-                 click: function() {
-                	 $('#confirmDelete').puidialog('hide');
-                 }
-             }
-         ]
-     });
-	 $('#confirmDelete').puidialog('show');
-}
-
 $(function() {
 	
-	// LOAD COMPONENTS
-	$.get('/GestioneSpese/resources/pages/editor.html', function(data){
-	    $('body').append(data);
-		initEditorComponent();
+	// LOAD EDITOR
+	 $.get('/GestioneSpese/resources/pages/editor.html', function(data) {
+		$('#editorContainer').html('<div style="position: absolute;">' + data + '</div>');
+		editorManager.init();
 	});
-	$('body').append('<div id="message">');
 	
 	// BUTTON AGGIUNGI SPESA
 	$('#bttAddSpesa').puibutton({
 		icon: 'fa-plus',
 	    click: function(event) {
-	    	showEditor(null);
+	    	editorManager.show(null);
 	    }
 	});
-	
-	// COMPONENTI EDITOR
 	
 	// COMPONENTE MESSAGGI
 	$('#message').puigrowl();

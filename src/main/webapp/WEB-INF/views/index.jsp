@@ -5,6 +5,7 @@
 <script src="/GestioneSpese/resources/js/primeui-all.js"></script>
 <script src="/GestioneSpese/resources/js/x-tag-core.min.js"></script>
 <script src="/GestioneSpese/resources/js/primeelements.min.js"></script>
+<script src="/GestioneSpese/resources/js/editorManager.js"></script>
 <script src="/GestioneSpese/resources/js/homeFrontController.js"></script>
 <script src="/GestioneSpese/resources/js/spesaFrontController.js"></script>
 <script src="/GestioneSpese/resources/js/tipospesaFrontController.js"></script>
@@ -17,10 +18,8 @@
 
 <body>
 
-<script src="/GestioneSpese/resources/js/loadComponents.js"></script>
-	<div id="confirmDelete" style="display: none;">
-		<p style="margin-top: 5px; margin-bottom: 5px;">Confermi la	cancellazione di questo elemento?</p>
-	</div>
+	<div id="editorContainer" style="position: absolute;"></div>
+	<div id="message"></div>
 
 	<div class="ui-grid ui-grid-responsive"
 		style="margin-top: 5px; margin-bottom: 5px;">

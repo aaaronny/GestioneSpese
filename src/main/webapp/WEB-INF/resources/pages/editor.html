@@ -1,4 +1,9 @@
-<div id="editorData" style="display: none">
+<!-- 						EDITOR DIALOG							 -->
+
+<p-dialog id="editorData" title="Gestione Spese" resizable="false"
+	width="540" height="260" closeonescape="true" closable="false"
+	location="center" resizable="false" modal>
+	
 	<h3 id="editorCaption"></h3>
 	<div class="ui-grid ui-grid-responsive"
 		style="margin-top: 5px; margin-bottom: 5px;">
@@ -34,6 +39,26 @@
 			</div>
 		</div>
 	</div>
-</div>
+	
+	<script type="x-facet-buttons">
+        <button type="button" is="p-button" icon="fa-save" onclick="editorManager.save()">Salva</button>
+        <button type="button" is="p-button" icon="fa-close" onclick="editorManager.cancel('editorData')">Annulla</button>
+	</script>
+	
+</p-dialog>
 
-<script src="/GestioneSpese/resources/js/editorManager.js"></script>
+
+<!-- 						DELETE DIALOG							 -->
+
+<p-dialog id="confirmDelete" title="Gestione Spese" resizable="false"
+	width="450" height="50" closeonescape="true" closable="false"
+	location="center" resizable="false" modal>
+	
+	<p style="margin-top: 5px; margin-bottom: 5px;">Confermi la	cancellazione di questo elemento?</p>
+
+	<script type="x-facet-buttons">
+        <button type="button" is="p-button" icon="fa-check" onclick="editorManager.del()">Si</button>
+        <button type="button" is="p-button" icon="fa-close" onclick="editorManager.cancel('confirmDelete')">No</button>
+	</script>
+	
+</p-dialog>
