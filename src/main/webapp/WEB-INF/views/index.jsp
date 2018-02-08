@@ -40,7 +40,7 @@
 		<div class="ui-grid-row" id="idRowDiv">
 			<div class="ui-grid-col-1"></div>
 			<div class="ui-grid-col-10">
-				<button id="bttAddSpesa" type="button">Aggiungi</button>
+				<button id="bttAddSpesa" is="p-button" icon="fa-plus" onclick="editorManager.show(null)">Aggiungi</button>
 			</div>
 			<div class="ui-grid-col-1"></div>
 		</div>

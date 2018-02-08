@@ -51,14 +51,6 @@ $(function() {
 		editorManager.init();
 	});
 	
-	// BUTTON AGGIUNGI SPESA
-	$('#bttAddSpesa').puibutton({
-		icon: 'fa-plus',
-	    click: function(event) {
-	    	editorManager.show(null);
-	    }
-	});
-	
 	// COMPONENTE MESSAGGI
 	$('#message').puigrowl();
 	
